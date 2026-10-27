@@ -1,0 +1,145 @@
+@use "../../abstracts/variables" as v;
+
+.navWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.navList {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  text-decoration: none;
+  color: v.$text-light !important; // Default holat
+  font-weight: 400;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  transition: color 0.2s var(--m-ease); // 0.3s -> 0.2s (yana tezlashdi)
+
+  // ✨ Hover chizig'ini qizil global stildan sariqqa majburlaymiz (Override)
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: v.$accent-yellow !important; // Qizil emas, sariq!
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s var(--m-ease) !important; // Shiddatli chiqish
+  }
+
+  &:hover, &.active {
+    color: v.$accent-yellow !important; // Matn ham sariq bo'ladi
+
+    &::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+
+}
+
+.linkNumber {
+  display: none;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 20px;
+  color: v.$text-light;
+}
+
+.socialIcon {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2rem;
+  transition: 0.2s var(--m-ease);
+
+  &:hover {
+    color: v.$accent-yellow !important;
+    transform: translateY(-3px);
+  }
+}
+
+:global(.m-reveal) {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--m-ease), transform 0.4s var(--m-ease);
+}
+
+:global(.is-ready) :global(.m-reveal) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Responsive Media Queries --- */
+
+// 1. Desktop va Katta ekranlar (Ijtimoiy tarmoqlarni yashiramiz)
+@media (min-width: 1025px) {
+  .socialLinks {
+    display: none; // Desktopda ko'rinmaydi
+  }
+}
+
+// 2. Planshetlar (Laptops & Tablets - 1024px gacha)
+@media (max-width: 1024px) {
+  .navList {
+    gap: 30px; // Masofani biroz qisqartiramiz
+  }
+
+  .socialLinks {
+    display: none; // Hali ham yashirin
+  }
+}
+
+@media (max-width: 768px) {
+  .navWrapper {
+    padding: 40px 20px;
+    justify-content: space-between;
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+  }
+
+  .link {
+    font-size: 1.1rem;
+    width: 100%;
+  }
+
+  .socialLinks {
+    display: flex;
+    margin-top: auto;
+    padding-top: 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .socialIcon {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navList {
+    gap: 20px;
+  }
+
+  .link {
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+}

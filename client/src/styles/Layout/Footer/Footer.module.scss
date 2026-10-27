@@ -1,0 +1,162 @@
+@use "../../abstracts/variables" as v;
+
+.footer {
+  background-color: transparent;
+  padding: 80px 0 0;
+  color: v.$text-light;
+  overflow: hidden;
+}
+
+.mainContent {
+  padding-bottom: 60px;
+}
+
+.ctaBox {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 24px;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(v.$accent-yellow, 0.2);
+  }
+
+  h5 {
+    font-weight: 400;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-weight: 200;
+    color: v.$text-muted;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+.btnCta {
+  display: block;
+  width: 100%;
+  background-color: v.$accent-yellow;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: lighten(v.$accent-yellow, 10%);
+    box-shadow: 0 10px 25px rgba(v.$accent-yellow, 0.2);
+    transform: scale(1.02);
+  }
+}
+
+.copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px 0;
+
+  .copyText {
+    font-weight: 200;
+    font-size: 0.85rem;
+    color: v.$text-muted;
+  }
+}
+
+.mangaBadge {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: v.$accent-yellow;
+  padding: 6px 16px;
+  border: 1px solid rgba(v.$accent-yellow, 0.3);
+  border-radius: 100px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding-top: 60px;
+  }
+
+  .ctaBox {
+    padding: 30px;
+
+    h5 {
+      font-size: 1.15rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 40px;
+  }
+
+  .mainContent {
+    padding-bottom: 40px;
+  }
+
+  .ctaBox {
+    text-align: center;
+    border-radius: 20px;
+
+    p {
+      font-size: 0.85rem;
+    }
+  }
+
+  .copyright {
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding-top: 30px;
+  }
+
+  .ctaBox {
+    padding: 25px 20px;
+
+    h5 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .btnCta {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .copyText {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .mangaBadge {
+    font-size: 0.7rem;
+    padding: 4px 12px;
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .footer {
+    padding-top: 20px;
+  }
+
+  .mainContent {
+    padding-bottom: 20px;
+  }
+}

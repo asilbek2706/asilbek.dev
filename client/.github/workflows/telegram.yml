@@ -1,0 +1,30 @@
+name: Notify Telegram 🚀
+
+on:
+  push:
+    branches: [frontend-asilbek]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          format: markdown
+          message: |
+            🚀 **Project Update**
+
+            📂 **Repo:** `${{ github.repository }}`
+            🌿 **Branch:** `${{ github.ref_name }}`
+            👤 **Author:** `${{ github.actor }}`
+
+            💬 **Message:**
+            > _${{ github.event.head_commit.message }}_
+
+            ✅ **Status:** Successfully Deployed
+            ⏰ **Time:** `${{ github.event.head_commit.timestamp }}`
+
+            🔗 [Commit Details](${{ github.event.head_commit.url }})

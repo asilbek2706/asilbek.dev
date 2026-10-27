@@ -1,0 +1,165 @@
+@use "../abstracts/variables" as v;
+
+.formContainer {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02); // Juda yupqa shaffof fon
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 40px;
+  border-radius: 24px;
+  backdrop-filter: blur(10px); // Orqa fonni biroz xiralashtirish (ixtiyoriy)
+}
+
+.headerSection {
+  margin-bottom: 35px;
+
+  .metaBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(v.$accent-yellow, 0.08);
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(v.$accent-yellow, 0.2);
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      background: v.$accent-yellow;
+      border-radius: 50%;
+      box-shadow: 0 0 10px v.$accent-yellow;
+      animation: pulse 2s infinite;
+    }
+
+    .badgeText {
+      font-size: 0.65rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: v.$accent-yellow;
+    }
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 950;
+    color: #fff;
+    letter-spacing: -1px;
+    margin: 0;
+  }
+}
+
+.formStack {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1.5px;
+    padding-left: 5px;
+  }
+
+  .input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.15);
+    }
+
+    &:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: v.$accent-yellow;
+      box-shadow: 0 0 20px rgba(v.$accent-yellow, 0.05);
+    }
+  }
+
+  textarea.input {
+    resize: none;
+  }
+}
+
+.submitButton {
+  margin-top: 10px;
+  background: v.$accent-yellow;
+  border: none;
+  padding: 18px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .btnText {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: #000;
+    letter-spacing: 1px;
+  }
+
+  i {
+    color: #000;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(v.$accent-yellow, 0.2);
+
+    i {
+      transform: translateX(5px);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+  }
+}
+
+.formFooter {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  .footerNote {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.2);
+    font-style: italic;
+    margin: 0;
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 576px) {
+  .formContainer {
+    padding: 25px;
+  }
+  .title {
+    font-size: 1.6rem;
+  }
+}

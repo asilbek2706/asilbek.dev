@@ -1,0 +1,207 @@
+@use "../abstracts/variables" as v;
+
+// Asosiy konteyner - to'liq shaffof
+.contactPageWrapper {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 0 60px;
+  background: transparent;
+}
+
+// Chap/O'ng bloklarning umumiy stegi
+.sidebarSticky {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  animation: formEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// Savollar arxiviga o'tish tugmasi
+.jumpToBtn {
+  width: 100%;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  .btnInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    i {
+      color: v.$accent-yellow;
+      font-size: 1.2rem;
+    }
+
+    span {
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+
+  .countBadge {
+    background: rgba(255, 255, 255, 0.06);
+    color: v.$accent-yellow;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    transition: 0.3s;
+    font-family: monospace;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: v.$accent-yellow;
+    transform: translateY(-3px);
+
+    .countBadge {
+      background: v.$accent-yellow;
+      color: #000;
+      box-shadow: 0 0 15px rgba(v.$accent-yellow, 0.5);
+    }
+  }
+}
+
+// Ijtimoiy tarmoqlar bloki
+.socialsWrapper {
+  margin-top: 10px;
+
+  .socialHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    .line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .text {
+      font-size: 0.55rem;
+      font-weight: 950;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.socialGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.socialCard {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .iconBox {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+  }
+
+  .info {
+    label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.25);
+      display: block;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(v.$accent-yellow, 0.3);
+    transform: translateX(8px);
+
+    .iconBox {
+      background: rgba(v.$accent-yellow, 0.1);
+      color: v.$accent-yellow;
+      transform: scale(1.1);
+    }
+
+    .info p {
+      color: #fff;
+    }
+  }
+}
+
+// Success/Error xabarnomalar joylashuvi
+.statusMount {
+  margin-top: 15px;
+}
+
+// reCAPTCHA v3 Badge uchun global stil
+:global {
+  .grecaptcha-badge {
+    visibility: visible !important;
+    z-index: 9999 !important;
+    bottom: 110px !important; // Navigation-dan yuqorida turishi uchun
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+
+    &:hover {
+      transform: scale(1.1) translateX(-10px) !important;
+    }
+  }
+}
+
+// Kirish animatsiyasi
+@keyframes formEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Adaptiv dizayn
+@media (max-width: 768px) {
+  .contactPageWrapper {
+    padding: 100px 0 40px;
+  }
+
+  .socialCard:hover {
+    transform: none; // Mobilda surilish noqulay bo'lishi mumkin
+  }
+}

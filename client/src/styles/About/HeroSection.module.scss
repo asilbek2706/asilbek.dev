@@ -1,0 +1,421 @@
+@use "../abstracts/variables" as v;
+
+.aboutHero {
+  position: relative;
+  padding: 120px 0;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  // 1. IMAGE STYLES
+  .imageContainer {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+    z-index: 2;
+
+    .abstractShape {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(v.$accent-yellow, 0.08) 0%, transparent 70%);
+      filter: blur(40px);
+      z-index: -1;
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    .imageFrame {
+      width: 340px;
+      height: 440px;
+      position: relative;
+
+      .profileImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 43%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        filter: grayscale(20%) brightness(0.9);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+      }
+
+      &:hover .profileImg {
+        filter: grayscale(0%) brightness(1.1);
+        transform: scale(1.02) rotateY(-8deg);
+        border-color: v.$accent-yellow;
+        box-shadow: 0 40px 80px rgba(v.$accent-yellow, 0.1);
+      }
+    }
+
+    .expBadge {
+      position: absolute;
+      bottom: 40px;
+      right: -30px;
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 18px 25px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      animation: floatBadge 6s infinite ease-in-out;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+      .expIcon {
+        font-size: 2rem;
+        color: v.$accent-yellow;
+        filter: drop-shadow(0 0 10px rgba(v.$accent-yellow, 0.5));
+      }
+
+      .expTitle {
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin: 0;
+      }
+
+      .expSub {
+        color: rgba(255, 255, 255, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  // 2. INFO STYLES
+  .infoWrapper {
+    .metaBadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+        background: rgba(v.$accent-yellow, 0.05);
+      border: 1px solid rgba(v.$accent-yellow, 0.1);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 25px;
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        background: v.$accent-yellow;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+      }
+
+      .metaText {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: v.$accent-yellow;
+        font-weight: 600;
+      }
+    }
+
+    .mainTitle {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 30px;
+
+      .outline {
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+        transition: 0.4s;
+      }
+
+      &:hover .outline {
+        -webkit-text-stroke: 1px v.$accent-yellow;
+      }
+    }
+
+    .leadText {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 45px;
+      font-weight: 300;
+      max-width: 90%;
+    }
+
+    .contactGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .contactCard {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 22px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      transition: 0.4s ease;
+      backdrop-filter: blur(10px);
+
+      .iconBox {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: v.$accent-yellow;
+        font-size: 1.4rem;
+        transition: 0.4s;
+      }
+
+      .details {
+        .label {
+          display: block;
+          font-size: 0.7rem;
+          color: rgba(255, 255, 255, 0.3);
+          text-transform: uppercase;
+          margin-bottom: 3px;
+        }
+        .link, .value {
+          color: #fff;
+          font-weight: 500;
+          text-decoration: none;
+          font-size: 0.95rem;
+          transition: 0.3s;
+        }
+      }
+
+      &:hover {
+        background: rgba(v.$accent-yellow, 0.03);
+        border-color: rgba(v.$accent-yellow, 0.2);
+        transform: translateY(-5px);
+
+        .iconBox {
+          background: v.$accent-yellow;
+          color: #000;
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+      .footerLabel {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.3);
+        font-weight: 400;
+      }
+
+      .socialGrid {
+        display: flex;
+        gap: 15px;
+      }
+
+      .socialBtn {
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.3rem;
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-decoration: none;
+
+        &:hover {
+          background: v.$accent-yellow;
+          color: #000;
+          border-color: v.$accent-yellow;
+          transform: translateY(-8px) rotate(10deg);
+          box-shadow: 0 15px 30px rgba(v.$accent-yellow, 0.2);
+        }
+      }
+    }
+  }
+}
+
+@keyframes floatBadge {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-5px, -15px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+
+@media (max-width: 1200px) {
+  .aboutHero {
+    padding-top: 120px;
+    margin-bottom: 40px;
+
+    .imageContainer {
+      margin-top: 80px;
+      .imageFrame {
+        width: 300px;
+        height: 400px;
+      }
+    }
+
+    .infoWrapper {
+      .mainTitle {
+        font-size: 4rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .aboutHero {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 0;
+
+    .imageContainer {
+      margin-bottom: 60px;
+
+      .expBadge {
+        right: -10px;
+        bottom: 20px;
+        padding: 12px 20px;
+
+        .expIcon { font-size: 1.5rem; }
+        .expTitle { font-size: 1rem; }
+      }
+    }
+
+    .infoWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .leadText {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contactGrid {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutHero {
+    .imageContainer {
+      .imageFrame {
+        width: 260px;
+        height: 360px;
+      }
+
+      .abstractShape {
+        filter: blur(30px);
+      }
+    }
+
+    .infoWrapper {
+      .mainTitle {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .contactGrid {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .contactCard {
+        padding: 18px;
+        justify-content: flex-start;
+        text-align: left;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutHero {
+    padding: 40px 0;
+
+    .imageContainer {
+      .imageFrame {
+        width: 220px;
+        height: 300px;
+      }
+
+      .expBadge {
+        right: -5px;
+        padding: 10px 15px;
+        gap: 10px;
+
+        .expIcon { font-size: 1.2rem; }
+        .expTitle { font-size: 0.9rem; }
+      }
+    }
+
+    .infoWrapper {
+      .metaBadge {
+        margin-bottom: 15px;
+        padding: 4px 12px;
+      }
+
+      .mainTitle {
+        font-size: 2.2rem;
+      }
+
+      .leadText {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .footer {
+        .socialBtn {
+          width: 42px;
+          height: 42px;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (hover: none) {
+  .aboutHero .imageContainer .imageFrame:hover .profileImg {
+    transform: none;
+  }
+
+  .aboutHero .infoWrapper .contactCard:hover {
+    transform: none;
+  }
+}

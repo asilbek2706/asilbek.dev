@@ -1,0 +1,204 @@
+@use "../abstracts/variables" as v;
+
+.aboutPage {
+  background: transparent; // Asosiy layoutdagi fondan foydalanadi
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  .bgGlow {
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(v.$accent-yellow, 0.05) 0%, transparent 70%);
+    z-index: -1;
+    filter: blur(80px);
+  }
+}
+
+.separator {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+}
+
+// LOADING STYLES
+.loaderWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+
+  .customLoader {
+    text-align: center;
+
+    .circle {
+      width: 50px;
+      height: 50px;
+      border: 2px solid rgba(v.$accent-yellow, 0.1);
+      border-top-color: v.$accent-yellow;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    .text {
+      color: v.$accent-yellow;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+  }
+}
+
+// ERROR STYLES
+.errorWrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  .errorCard {
+    max-width: 400px;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 0, 0, 0.1);
+    border-radius: 30px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+
+    i {
+      font-size: 3rem;
+      color: #ff4d4d;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    h3 {
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 30px;
+    }
+
+    .refreshBtn {
+      background: v.$accent-yellow;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 100px;
+      font-weight: 700;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(v.$accent-yellow, 0.2);
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .aboutPage {
+    .bgGlow {
+      width: 350px;
+      height: 350px;
+      right: -20%;
+    }
+  }
+
+  .errorWrapper {
+    .errorCard {
+      padding: 40px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutPage {
+    .bgGlow {
+      width: 250px;
+      top: 10%;
+      filter: blur(60px);
+    }
+  }
+
+  .loaderWrapper {
+    .customLoader {
+      .circle {
+        width: 40px;
+        height: 40px;
+      }
+      .text {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+      }
+    }
+  }
+
+  .errorWrapper {
+    padding: 15px;
+
+    .errorCard {
+      max-width: 100%;
+      padding: 30px 20px;
+      border-radius: 20px;
+
+      i {
+        font-size: 2.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutPage {
+    .bgGlow {
+      width: 180px;
+      right: -30%;
+      opacity: 0.5;
+    }
+  }
+
+  .errorWrapper {
+    .errorCard {
+      padding: 25px 15px;
+
+      .refreshBtn {
+        width: 100%;
+        padding: 14px;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customLoader .circle {
+    animation-duration: 2s;
+  }
+
+  .errorCard .refreshBtn:hover {
+    transform: none;
+  }
+}

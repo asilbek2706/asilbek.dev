@@ -1,0 +1,111 @@
+@use "../abstracts/variables" as v;
+
+.header {
+  margin-bottom: 50px;
+  &.centered {
+    text-align: center;
+    .underline { margin: 15px auto 0; }
+  }
+}
+
+.subtitle {
+  color: v.$accent-yellow;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.title {
+  color: v.$text-light;
+  font-weight: 200;
+  font-size: 2.5rem;
+  letter-spacing: -1px;
+}
+
+.underline {
+  width: 40px;
+  height: 1px;
+  background: v.$accent-yellow;
+  margin-top: 15px;
+}
+
+@media (max-width: 1200px) {
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    margin-bottom: 35px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 30px;
+    padding: 0 15px;
+
+    &.centered {
+      .underline {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  .subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+  }
+
+  .underline {
+    width: 35px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 25px;
+  }
+
+  .subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .underline {
+    width: 30px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+}

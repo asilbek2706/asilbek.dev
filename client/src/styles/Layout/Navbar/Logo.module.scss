@@ -1,0 +1,44 @@
+@use "../../abstracts/variables" as v;
+
+.logoLink { text-decoration: none; }
+.logoText {
+  color: v.$text-light;
+  font-weight: 200;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  .dot { color: v.$accent-yellow; font-weight: 900; }
+  transition: opacity 0.3s ease;
+  &:hover { opacity: 0.7; }
+}
+
+
+@media (max-width: 1024px) {
+  .logoText {
+    font-size: 1.1rem;
+    letter-spacing: 0.8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logoText {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+
+    .dot {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+}
+
+@media (hover: none) {
+  .logoText:hover {
+    opacity: 1;
+  }
+}

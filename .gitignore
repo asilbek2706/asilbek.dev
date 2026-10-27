@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+
+# Virtual environments
+.venv/
+venv/
+server/.venv/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+server/.env
+
+# Django local files
+server/db.sqlite3
+server/media/
+server/staticfiles/
+
+# Frontend dependencies
+client/node_modules/
+
+# IDE
+.idea/
+
+# Python version file
+.python-version
+
+# Testing and caches
+.pytest_cache/
+.coverage
+htmlcov/

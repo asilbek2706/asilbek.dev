@@ -1,0 +1,138 @@
+@use "../abstracts/variables" as v;
+
+.statusWrapper {
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+
+  // Status turlariga ko'ra ranglar
+  &.success {
+    background: rgba(46, 213, 115, 0.08);
+    border-color: rgba(46, 213, 115, 0.2);
+    .iconBox { background: #2ed573; color: #000; box-shadow: 0 0 20px rgba(46, 213, 115, 0.4); }
+    .statusLabel { color: #2ed573; }
+    .progressLine { background: #2ed573; }
+  }
+
+  &.danger {
+    background: rgba(255, 71, 87, 0.08);
+    border-color: rgba(255, 71, 87, 0.2);
+    .iconBox { background: #ff4757; color: #fff; box-shadow: 0 0 20px rgba(255, 71, 87, 0.4); }
+    .statusLabel { color: #ff4757; }
+    .progressLine { background: #ff4757; }
+  }
+
+  &.info {
+    background: rgba(v.$accent-yellow, 0.08);
+    border-color: rgba(v.$accent-yellow, 0.2);
+    .iconBox { background: v.$accent-yellow; color: #000; box-shadow: 0 0 20px rgba(v.$accent-yellow, 0.4); }
+    .statusLabel { color: v.$accent-yellow; }
+    .progressLine { background: v.$accent-yellow; }
+  }
+}
+
+.statusContent {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  animation: iconPulse 2s infinite ease-in-out;
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .statusLabel {
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .message {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.progressLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  animation: progressShrink 5s linear forwards;
+}
+
+// Animatsiyalar
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); filter: brightness(1.2); }
+}
+
+@keyframes progressShrink {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+// Hover effekti
+.statusWrapper:hover {
+  .iconBox {
+    transform: rotate(15deg);
+  }
+}
+
+@media (max-width: 576px) {
+  .statusContent {
+    padding: 15px;
+    gap: 14px;
+  }
+
+  .iconBox {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+
+  .message {
+    font-size: 0.85rem;
+  }
+}

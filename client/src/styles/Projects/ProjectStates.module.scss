@@ -1,0 +1,279 @@
+@use "../abstracts/variables" as v;
+
+.loadingWrapper {
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .loader {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+
+    .circle {
+      width: 15px;
+      height: 15px;
+      background: v.$accent-yellow;
+      border-radius: 50%;
+      box-shadow: 0 0 15px v.$accent-yellow;
+      animation: bounce 0.6s infinite alternate;
+
+      &:nth-child(2) { animation-delay: 0.2s; }
+      &:nth-child(3) { animation-delay: 0.4s; }
+    }
+  }
+
+  .loadingText {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+}
+
+.errorCard {
+  background: rgba(255, 77, 77, 0.03);
+  border: 1px solid rgba(255, 77, 77, 0.1);
+  border-radius: 32px;
+  padding: 60px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  max-width: 500px;
+  margin: 40px auto;
+
+  .errorIcon {
+    font-size: 3rem;
+    color: #ff4d4d;
+    margin-bottom: 20px;
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .errorTitle {
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .errorDesc {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+    margin-bottom: 30px;
+  }
+
+  .retryBtn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: 0.3s;
+
+    &:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.emptyBox {
+  padding: 80px 0;
+  text-align: center;
+  opacity: 0.6;
+
+  .ghostIcon {
+    font-size: 4rem;
+    color: v.$accent-yellow;
+    margin-bottom: 20px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .emptyText {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .line {
+    width: 60px;
+    height: 2px;
+    background: v.$accent-yellow;
+    margin: 20px auto 0;
+    border-radius: 2px;
+  }
+}
+
+@keyframes bounce {
+  to { transform: translateY(-20px); opacity: 0.5; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@media (max-width: 1200px) {
+  .loadingWrapper {
+    padding: 80px 0;
+  }
+
+  .errorCard {
+    padding: 50px;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 991px) {
+  .loadingWrapper {
+    padding: 60px 0;
+  }
+
+  .errorCard {
+    padding: 40px;
+    margin: 30px auto;
+  }
+
+  .emptyBox {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .loadingWrapper {
+    padding: 50px 0;
+
+    .loader {
+      gap: 10px;
+      margin-bottom: 25px;
+
+      .circle {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .loadingText {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+    }
+  }
+
+  .errorCard {
+    padding: 35px 25px;
+    border-radius: 24px;
+    max-width: 90%;
+
+    .errorIcon {
+      font-size: 2.5rem;
+    }
+
+    .errorTitle {
+      font-size: 1.25rem;
+    }
+
+    .errorDesc {
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+    }
+  }
+
+  .emptyBox {
+    padding: 50px 0;
+
+    .ghostIcon {
+      font-size: 3rem;
+    }
+
+    .emptyText {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .loadingWrapper {
+    .loader .circle {
+      width: 10px;
+      height: 10px;
+    }
+
+    .loadingText {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+  }
+
+  .errorCard {
+    padding: 30px 20px;
+
+    .errorIcon {
+      font-size: 2.2rem;
+    }
+
+    .retryBtn {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 0.75rem;
+    }
+  }
+
+  .emptyBox {
+    .ghostIcon {
+      font-size: 2.5rem;
+    }
+
+    .emptyText {
+      font-size: 0.9rem;
+    }
+
+    .line {
+      width: 40px;
+    }
+  }
+
+  @keyframes bounce {
+    to { transform: translateY(-15px); opacity: 0.5; }
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .loadingWrapper, .emptyBox {
+    padding: 30px 0;
+  }
+
+  .errorCard {
+    margin: 20px auto;
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    max-width: 600px;
+    gap: 30px;
+
+    .errorIcon {
+      margin-bottom: 0;
+    }
+
+    .errorDesc {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circle, .errorIcon, .ghostIcon {
+    animation: none;
+  }
+}

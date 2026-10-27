@@ -1,0 +1,119 @@
+@use "../../abstracts/variables" as v;
+
+.title {
+  color: v.$text-light;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: v.$text-muted;
+  text-decoration: none;
+  font-weight: 200;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+
+  i {
+    width: 50px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    color: v.$accent-yellow;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  &:hover {
+    color: v.$text-light;
+
+    i {
+      background: v.$accent-yellow;
+      color: #000;
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+  }
+
+  .contactList {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+  }
+
+  .contactList {
+    gap: 16px;
+  }
+
+  .contactItem {
+    font-size: 0.9rem;
+    gap: 12px;
+
+    i {
+      width: 30px;
+      height: 30px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .contactList {
+    align-items: center;
+  }
+
+  .contactItem {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+
+    i {
+      background: rgba(v.$accent-yellow, 0.1);
+    }
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .contactList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .title {
+    margin-bottom: 15px;
+  }
+}

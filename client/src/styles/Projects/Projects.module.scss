@@ -1,0 +1,274 @@
+@use "../abstracts/variables" as v;
+
+.projectsPageWrapper {
+  position: relative;
+  padding: clamp(80px, 12vh, 160px) 0;
+  min-height: 100vh;
+  background-color: transparent;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  .halftone {
+    position: absolute;
+    inset: 0;
+    background-size: 35px 35px;
+    z-index: 1;
+    pointer-events: none;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 95%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 95%);
+  }
+
+  .ambientGlow {
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: clamp(400px, 50vw, 800px);
+    height: clamp(400px, 50vw, 800px);
+    background: radial-gradient(circle, rgba(v.$accent-yellow, 0.03) 0%, transparent 70%);
+    filter: blur(100px);
+    z-index: 0;
+    pointer-events: none;
+    animation: floatingGlow 15s infinite alternate ease-in-out;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(v.$accent-yellow, 0.015) 0%, transparent 70%);
+    filter: blur(120px);
+    z-index: 0;
+  }
+
+  :global(.container) {
+    position: relative;
+    z-index: 10;
+  }
+
+  // --- KARTALRNI TENG QILISH QISMI ---
+  :global(.row) {
+    --bs-gutter-y: 3rem;
+    position: relative;
+    display: flex; // Flex yoqildi
+    align-items: stretch; // Barcha ustunlar balandligini teng qiladi
+
+    & > [class*='col-'] {
+      display: flex; // Ustun ichidagi wrapper ham flex bo'ladi
+      opacity: 0;
+      transform: translateY(40px);
+      animation: projectItemReveal 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+
+      @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.15s};
+        }
+      }
+    }
+  }
+
+  .decorLine {
+    position: absolute;
+    width: 1px;
+    height: 150px;
+    background: linear-gradient(to bottom, v.$accent-yellow, transparent);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.2;
+    z-index: 1;
+  }
+
+  .scrollHint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.4;
+
+    .line {
+      width: 1px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: v.$accent-yellow;
+        animation: scrollLineAnim 2s infinite ease-in-out;
+      }
+    }
+
+    .text {
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+  }
+}
+
+:global(.projectWrapper) {
+  display: flex;
+  width: 100%;
+}
+
+:global(.projectCard) {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; // Kartani ustun balandligiga cho'zadi
+
+  :global(.infoSection) {
+    flex-grow: 1; // Tavsif qismi bo'sh joyni to'ldirib, footer-ni pastga suradi
+    display: flex;
+    flex-direction: column;
+
+    :global(.desc) {
+      flex-grow: 1; // Matn kam bo'lsa ham joy egallaydi
+    }
+  }
+
+  :global(.cardFooter) {
+    margin-top: auto; // Footer har doim eng pastda bir xil chiziqda turadi
+  }
+}
+
+// Keyframes
+@keyframes floatingGlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-5%, 5%) scale(1.1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(5%, -2%) scale(1.05);
+    opacity: 0.4;
+  }
+}
+
+@keyframes projectItemReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollLineAnim {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+:global(.ProjectLoading),
+:global(.ProjectError),
+:global(.ProjectEmpty) {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.projectsPageWrapper::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(v.$accent-yellow, 0.02) 0%, transparent 50%);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.projectsPageWrapper:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 1200px) {
+  .projectsPageWrapper {
+    margin-top: 80px;
+    padding: 100px 0;
+
+    .ambientGlow {
+      width: 500px;
+      height: 500px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .projectsPageWrapper {
+    :global(.row) {
+      --bs-gutter-y: 2.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .projectsPageWrapper {
+    padding: 80px 0;
+
+    .halftone {
+      background-size: 25px 25px;
+    }
+
+    .ambientGlow {
+      width: 300px;
+      height: 300px;
+      top: -5%;
+      right: -10%;
+    }
+
+    .scrollHint, .decorLine {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsPageWrapper {
+    padding: 60px 0;
+
+    :global(.row) {
+      --bs-gutter-y: 2rem;
+    }
+  }
+}

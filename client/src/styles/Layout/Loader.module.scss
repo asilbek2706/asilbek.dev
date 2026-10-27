@@ -1,0 +1,176 @@
+@use "../abstracts/variables" as v;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: v.$bg-dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+  visibility 0.8s;
+
+  &.fadeOut {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.mangaTitle {
+  font-weight: 200;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.1);
+  position: relative;
+  text-transform: uppercase;
+
+  &::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: v.$text-light;
+    border-right: 2px solid v.$accent-yellow;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typeText 2s steps(20) forwards;
+  }
+
+  .accent {
+    color: v.$accent-yellow;
+  }
+}
+
+.progressBar {
+  width: 200px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+
+  .progressFill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: v.$accent-yellow;
+    transform: translateX(-100%);
+    animation: fillProgress 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+.statusCode {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: v.$text-muted;
+  letter-spacing: 1px;
+  margin-top: 10px;
+
+  .blink {
+    animation: blink 1s infinite;
+    color: v.$accent-yellow;
+  }
+}
+
+@keyframes typeText {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fillProgress {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mangaTitle {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+  }
+
+  .progressBar {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mangaTitle {
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+  }
+
+  .progressBar {
+    width: 160px;
+  }
+
+  .statusCode {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    gap: 15px;
+  }
+
+  .mangaTitle {
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+
+    &::before {
+      border-right-width: 1.5px;
+    }
+  }
+
+  .progressBar {
+    width: 140px;
+    height: 1px;
+  }
+
+  .statusCode {
+    font-size: 0.6rem;
+    margin-top: 8px;
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .content {
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .statusCode {
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mangaTitle::before,
+  .progressFill,
+  .blink {
+    animation: none;
+    width: 100%;
+    transform: none;
+    opacity: 1;
+  }
+}

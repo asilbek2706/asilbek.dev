@@ -1,0 +1,28 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Django local files
+db.sqlite3
+media/
+staticfiles/
+
+# Test and tool caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE and local environment
+.idea/
+.python-version

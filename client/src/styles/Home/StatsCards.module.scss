@@ -1,0 +1,163 @@
+@use "../abstracts/variables" as v;
+
+.statsSection {
+  padding: 100px 0;
+}
+
+.glassCard {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 40px;
+  border-radius: 30px;
+  height: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 300;
+  color: v.$text-light;
+  margin-bottom: 35px;
+
+  i {
+    color: v.$accent-yellow;
+  }
+}
+
+.timelineItem {
+  border-left: 1px solid rgba(v.$accent-yellow, 0.3);
+  padding-left: 25px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    width: 7px;
+    height: 7px;
+    background: v.$accent-yellow;
+    border-radius: 50%;
+  }
+}
+
+.year {
+  color: v.$accent-yellow;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.school {
+  color: v.$text-light;
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.text {
+  color: v.$text-muted;
+  font-weight: 200;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+@media (max-width: 1200px) {
+  .statsSection {
+    padding: 80px 0;
+  }
+
+  .glassCard {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .statsSection {
+    padding: 60px 0;
+  }
+
+  .cardTitle {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .statsSection {
+    padding: 50px 0;
+  }
+
+  .glassCard {
+    padding: 25px;
+    border-radius: 20px;
+  }
+
+  .timelineItem {
+    padding-left: 20px;
+
+    &::before {
+      left: -4.5px;
+    }
+  }
+
+  .school {
+    font-size: 0.95rem;
+  }
+
+  .text {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsSection {
+    padding: 40px 0;
+  }
+
+  .glassCard {
+    padding: 20px;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+    gap: 10px;
+  }
+
+  .timelineItem {
+    padding-bottom: 25px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .year {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+  .statsSection {
+    padding: 30px 0;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

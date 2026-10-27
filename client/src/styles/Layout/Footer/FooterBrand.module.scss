@@ -1,0 +1,138 @@
+@use "../../abstracts/variables" as v;
+
+.brandWrapper {
+  .logoText {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    color: v.$text-light;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateX(5px);
+    }
+
+    .dot {
+      color: v.$accent-yellow;
+      font-weight: 900;
+      margin-left: 1px;
+      text-shadow: 0 0 15px rgba(v.$accent-yellow, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      display: block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  .quote {
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: v.$text-muted;
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 85%;
+    border-left: 2px solid rgba(v.$accent-yellow, 0.2);
+    padding-left: 20px;
+  }
+}
+
+.socialGrid {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+
+  .socialPill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    color: v.$text-muted;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    backdrop-filter: blur(5px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+    i {
+      font-size: 1.1rem;
+      color: v.$text-muted;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      background: rgba(v.$accent-yellow, 0.1);
+      border-color: rgba(v.$accent-yellow, 0.3);
+      color: v.$text-light;
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+      i {
+        color: v.$accent-yellow;
+        transform: rotate(-12deg) scale(1.2);
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .brandWrapper .logoText {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .brandWrapper {
+    .logoText {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .quote {
+      font-size: 0.9rem;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+
+  .socialGrid {
+    gap: 10px;
+
+    .socialPill {
+      padding: 10px 20px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .brandWrapper .logoText {
+    font-size: 1.25rem;
+  }
+
+  .socialGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+
+    .socialPill {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
