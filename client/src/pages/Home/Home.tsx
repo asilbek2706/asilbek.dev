@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useAboutStore } from '../../store/useAboutStore';
+import { getAboutInfo } from '../../services/aboutService';
 import { getProjects } from '../../services/projectService';
 
 import Hero from './Hero';
@@ -8,19 +8,24 @@ import StatsCard from "./StatsCards";
 import SectionHeader from "./SectionHeader";
 import ProjectCard from "./ProjectCard";
 
-import type { Project } from '../../types';
+import type { AboutData, Project } from '../../types';
 import styles from '../../styles/Home/Home.module.scss';
-import {HomeProvider} from "../../context/pages/HomeContext.tsx";
+import { HomeProvider } from "../../context/pages/HomeContext.tsx";
 
 const Home: React.FC = () => {
-    const aboutInfo = useAboutStore((state) => state.aboutInfo);
+    const { data: aboutInfo, isLoading: isAboutLoading } = useQuery<AboutData | null>({
+        queryKey: ['about'],
+        queryFn: getAboutInfo,
+    });
 
-    const { data: projects, isLoading } = useQuery<Project[]>({
+    const { data: projects, isLoading: isProjectsLoading } = useQuery<Project[]>({
         queryKey: ['projects'],
         queryFn: getProjects,
     });
 
-    if (!aboutInfo) return null;
+    if (isAboutLoading || !aboutInfo) {
+        return null;
+    }
 
     return (
         <HomeProvider>
@@ -38,7 +43,7 @@ const Home: React.FC = () => {
                         />
 
                         <div className="row g-4 justify-content-center mt-2">
-                            {isLoading ? (
+                            {isProjectsLoading ? (
                                 <div className="col-12 text-center py-5">
                                     <div className={styles.loadingState}>
                                         <span className={styles.loaderLine}></span>
@@ -46,14 +51,16 @@ const Home: React.FC = () => {
                                     </div>
                                 </div>
                             ) : (
-                                projects && projects.slice(-2).reverse().map((p, index) => (
-                                    <div
-                                        key={`${p.id}-${index}`}
-                                        className="col-md-6 col-lg-5"
-                                    >
-                                        <ProjectCard project={p} />
-                                    </div>
-                                ))
+                                projects &&
+                                projects
+                                    .slice(-2)
+                                    .reverse()
+                                    .map((project) => (
+                                        <ProjectCard
+                                            key={project.id}
+                                            project={project}
+                                        />
+                                    ))
                             )}
                         </div>
 

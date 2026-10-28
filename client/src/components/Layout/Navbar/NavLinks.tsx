@@ -26,8 +26,8 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMobile }) => {
     return (
         <div className={`${styles.navWrapper} ${isMobile ? styles.mobileLayout : ''}`}>
             <ul className={styles.navList}>
-                {links.map((link, index) => (
-                    <li key={link.path} className={`m-reveal delay-${index + 2}`}>
+                {links.map((link) => (
+                    <li key={link.path}>
                         <NavLink
                             to={link.path}
                             onClick={() => setIsMenuOpen(false)}
@@ -41,8 +41,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMobile }) => {
                 ))}
             </ul>
 
-            {/* Social blok linklar tugagandan keyin chiqishi uchun links.length + 2 ishlatildi */}
-            <div className={`${styles.socialLinks} m-reveal delay-${links.length + 2}`}>
+            <div className={styles.socialLinks}>
                 {socials.map((social, idx) => (
                     <a
                         key={idx}

@@ -19,8 +19,8 @@ const Loader = ({ onFinished }: Props) => {
     return (
         <div className={`${styles.overlay} ${isFadingOut ? styles.fadeOut : ''}`}>
             <div className={styles.content}>
-                <h1 className={styles.mangaTitle} data-text="ASILBEK-KAROMATOV.DEV">
-                    ASILBEK-KAROMATOV<span className={styles.accent}>.DEV</span>
+                <h1 className={styles.mangaTitle} data-text="ASILBEK">
+                    ASILBEK
                 </h1>
 
                 <div className={styles.progressBar}>

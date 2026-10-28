@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import type { Project } from "../../types";
 import styles from "../../styles/Projects/ProjectItem.module.scss";
 
@@ -21,17 +21,17 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
                         </div>
 
                         <img
-                            src={project.project_image}
-                            alt={project.project_name}
+                            src={project.image || ""}
+                            alt={project.title}
                             className={styles.mainImg}
                         />
 
                         {/* Suzib yuruvchi Linklar */}
                         <div className={styles.floatingActions}>
-                            <a href={project.project_github_link} target="_blank" rel="noreferrer" className={styles.circleBtn}>
+                            <a href={project.github_link} target="_blank" rel="noreferrer" className={styles.circleBtn}>
                                 <i className="bi bi-github"></i>
                             </a>
-                            <a href={project.project_link} target="_blank" rel="noreferrer" className={styles.circleBtn}>
+                            <a href={project.demo_link} target="_blank" rel="noreferrer" className={styles.circleBtn}>
                                 <i className="bi bi-arrow-up-right"></i>
                             </a>
                         </div>
@@ -44,16 +44,16 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project }) => {
                             <div className={styles.statusDot}></div>
                         </div>
 
-                        <h3 className={styles.title}>{project.project_name}</h3>
+                        <h3 className={styles.title}>{project.title}</h3>
 
                         <p className={styles.desc}>
-                            {project.project_description}
+                            {project.description}
                         </p>
 
                         <div className={styles.cardFooter}>
                             <div className={styles.divider}></div>
                             <div className={styles.footerContent}>
-                                <a href={project.project_link} target="_blank" rel="noreferrer" className={styles.liveLink}>
+                                <a href={project.demo_link} target="_blank" rel="noreferrer" className={styles.liveLink}>
                                     <span>LIVE PREVIEW</span>
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

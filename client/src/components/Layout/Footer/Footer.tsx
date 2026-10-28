@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                     <div className="row align-items-center">
                         <div className="col-md-6 text-center text-md-start">
                             <span className={styles.copyText}>
-                                &copy; {new Date().getFullYear()} {aboutInfo.firstname.toLocaleLowerCase()}-karomatov.dev — Barcha huquqlar himoyalangan.
+                                &copy; {new Date().getFullYear()} {aboutInfo.firstname.toLocaleLowerCase()} — Barcha huquqlar himoyalangan.
                             </span>
                         </div>
                         <div className="col-md-6 text-center text-md-end">

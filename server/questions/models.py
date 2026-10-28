@@ -2,6 +2,13 @@
 
 
 class Question(models.Model):
+    contact_message = models.OneToOneField(
+        "contact.ContactMessage",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="public_question",
+    )
     question = models.CharField(max_length=255)
     answer = models.TextField()
     order = models.PositiveIntegerField(default=0)

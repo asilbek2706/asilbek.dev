@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { getQuestions } from '../../services/contactService';
@@ -78,11 +78,11 @@ const QuestionsPage: React.FC = () => {
                                     {/* User Message Card */}
                                     <div className={styles.userCard}>
                                         <div className={styles.cardHeader}>
-                                            <span className={styles.userName}>{q.name}</span>
+                                            <span className={styles.userName}>SAVOL</span>
                                             <span className={styles.metaTag}>USER_SENT</span>
                                         </div>
                                         <div className={styles.cardBody}>
-                                            <p>{q.message}</p>
+                                            <p>{q.question}</p>
                                         </div>
                                     </div>
 

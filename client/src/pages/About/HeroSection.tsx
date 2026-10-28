@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import type { AboutData } from '../../types';
 import styles from '../../styles/About/HeroSection.module.scss';
 
@@ -17,7 +17,7 @@ const HeroSection: React.FC<Props> = ({ about }) => {
                             <div className={styles.abstractShape}></div>
                             <div className={styles.imageFrame}>
                                 <img
-                                    src={about.image}
+                                    src={about.image || ""}
                                     alt={about.firstname}
                                     className={styles.profileImg}
                                 />

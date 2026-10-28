@@ -1,132 +1,214 @@
-@use "../abstracts/variables" as v;
+﻿@use "../abstracts/variables" as v;
 
 .bgContainer {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: #121212;
+  isolation: isolate;
+  background: #080808;
   overflow: hidden;
   pointer-events: none;
-  transition: background-color 0.4s var(--m-ease);
+  contain: paint;
+}
+
+.ambientGlow {
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgba(255, 204, 51, 0.09), transparent 35%),
+    radial-gradient(ellipse at 82% 70%, rgba(255, 180, 0, 0.07), transparent 32%),
+    radial-gradient(ellipse at 52% 48%, rgba(255, 255, 255, 0.025), transparent 42%);
+  animation: ambientDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(ellipse at center, #000 10%, transparent 78%);
 }
 
 .shapeWrapper {
   position: absolute;
   top: 50%;
-  right: -10%;
-  transform: translateY(-50%);
-  width: 110vh;
-  height: 110vh;
+  right: -12%;
+  width: min(110vh, 1050px);
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-}
-
-.isReady .shapeWrapper {
-  opacity: 1;
-  transition: opacity 1.5s var(--m-ease);
+  opacity: 0.8;
+  transform: translateY(-50%);
+  animation: shapeFloat 12s ease-in-out infinite alternate;
 }
 
 .spiralSvg {
   width: 100%;
   height: 100%;
-  color: rgba(255, 255, 255, 0.07);
-  animation: rotateSlow 70s linear infinite;
-  filter: blur(30px);
+  color: rgba(255, 205, 65, 0.16);
+  animation: rotateSlow 90s linear infinite;
+  filter: blur(1.5px);
+}
+
+.orbOne,
+.orbTwo,
+.orbThree {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.orbOne {
+  width: min(34vw, 420px);
+  aspect-ratio: 1;
+  top: 12%;
+  left: -9%;
+  background: radial-gradient(circle, rgba(255, 196, 35, 0.13), rgba(255, 196, 35, 0.025) 48%, transparent 72%);
+  filter: blur(18px);
+  animation: orbFloatOne 17s ease-in-out infinite alternate;
+}
+
+.orbTwo {
+  width: min(38vw, 500px);
+  aspect-ratio: 1;
+  right: -10%;
+  bottom: -12%;
+  background: radial-gradient(circle, rgba(255, 220, 100, 0.11), rgba(255, 180, 0, 0.025) 48%, transparent 72%);
+  filter: blur(24px);
+  animation: orbFloatTwo 21s ease-in-out infinite alternate;
+}
+
+.orbThree {
+  width: min(22vw, 280px);
+  aspect-ratio: 1;
+  top: 48%;
+  left: 38%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.045), transparent 70%);
+  filter: blur(20px);
+  animation: orbFloatThree 14s ease-in-out infinite alternate;
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, rgba(255, 220, 120, 0.7) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.42) 1px, transparent 1.8px);
+  background-size: 137px 151px, 193px 181px;
+  background-position: 12px 22px, 74px 91px;
+  mask-image: radial-gradient(ellipse at center, #000 10%, transparent 85%);
+  animation: particleDrift 32s linear infinite;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-                  circle at 75% 50%,
-                  transparent 0%,
-                  #121212 85%
-  );
+  background:
+    linear-gradient(180deg, rgba(8, 8, 8, 0.1), transparent 35%, rgba(8, 8, 8, 0.25)),
+    radial-gradient(ellipse at center, transparent 25%, rgba(8, 8, 8, 0.55) 100%);
 }
 
 @keyframes rotateSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-@media (max-width: 1200px) {
-  .shapeWrapper {
-    right: -15%;
-    width: 100vh;
-    height: 100vh;
-  }
+@keyframes ambientDrift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to { transform: translate3d(2%, 2%, 0) scale(1.08); }
+}
+
+@keyframes shapeFloat {
+  from { translate: 0 -1.5%; }
+  to { translate: 0 1.5%; }
+}
+
+@keyframes orbFloatOne {
+  from { transform: translate3d(0, 0, 0) scale(0.9); }
+  to { transform: translate3d(14vw, 10vh, 0) scale(1.12); }
+}
+
+@keyframes orbFloatTwo {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-12vw, -9vh, 0) scale(0.88); }
+}
+
+@keyframes orbFloatThree {
+  from { transform: translate3d(-5vw, 4vh, 0); }
+  to { transform: translate3d(7vw, -6vh, 0); }
+}
+
+@keyframes particleDrift {
+  from { background-position: 12px 22px, 74px 91px; }
+  to { background-position: 149px 173px, -119px 272px; }
 }
 
 @media (max-width: 991px) {
   .shapeWrapper {
-    right: -20%;
-    width: 90vh;
-    height: 90vh;
-    opacity: 0.8;
+    width: 90vw;
+    right: -28%;
+    opacity: 0.65;
   }
 
-  .overlay {
-    background: radial-gradient(
-                    circle at 80% 50%,
-                    transparent 0%,
-                    #121212 90%
-    );
-  }
-}
-
-@media (max-width: 768px) {
-  .shapeWrapper {
-    top: 60%;
-    right: 50%;
-    transform: translate(50%, -50%);
-    width: 70vh;
-    height: 70vh;
-    filter: blur(20px);
+  .orbOne {
+    width: 55vw;
   }
 
-  .spiralSvg {
-    animation: rotateSlow 60s linear infinite;
+  .orbTwo {
+    width: 58vw;
   }
 
-  .overlay {
-    background: radial-gradient(
-                    circle at 50% 60%,
-                    rgba(18, 18, 18, 0.4) 0%,
-                    #121212 100%
-    );
+  .grid {
+    background-size: 44px 44px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .shapeWrapper {
-    top: 50%;
-    width: 60vh;
-    height: 60vh;
+    width: 95vw;
+    right: -35%;
+    opacity: 0.45;
   }
 
-  .spiralSvg {
-    color: rgba(255, 255, 255, 0.05);
+  .orbOne {
+    width: 70vw;
+    left: -25%;
+  }
+
+  .orbTwo {
+    width: 75vw;
+    right: -30%;
+  }
+
+  .orbThree {
+    width: 45vw;
+  }
+
+  .particles {
+    opacity: 0.3;
+  }
+
+  .grid {
+    opacity: 0.09;
+    background-size: 36px 36px;
   }
 }
 
-@media (max-height: 450px) and (orientation: landscape) {
-  .shapeWrapper {
-    width: 120vh;
-    height: 120vh;
-    right: -25%;
-  }
-
-  .overlay {
-    background: radial-gradient(
-                    circle at 85% 50%,
-                    transparent 0%,
-                    #121212 85%
-    );
+@media (prefers-reduced-motion: reduce) {
+  .ambientGlow,
+  .shapeWrapper,
+  .spiralSvg,
+  .orbOne,
+  .orbTwo,
+  .orbThree,
+  .particles {
+    animation: none !important;
   }
 }

@@ -14,24 +14,32 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { setAboutInfo, aboutInfo } = useAboutStore();
     const [isLoaderVisible, setIsLoaderVisible] = useState(true);
 
-    const { data, isLoading, isError } = useQuery<AboutData>({
+    const {
+        data,
+        isLoading,
+        isError,
+    } = useQuery<AboutData | null>({
         queryKey: ['about'],
         queryFn: getAboutInfo,
         staleTime: Infinity,
     });
 
     useEffect(() => {
-        if (data) setAboutInfo(data);
+        if (data) {
+            setAboutInfo(data);
+        }
     }, [data, setAboutInfo]);
 
     if (isLoading || (isLoaderVisible && !aboutInfo)) {
         return <Loader onFinished={() => setIsLoaderVisible(false)} />;
     }
 
-    if (isError) {
+    if (isError || !aboutInfo) {
         return (
             <div className="container py-5 text-center">
-                <div className="alert alert-danger">Ma'lumotlarni yuklashda xatolik yuz berdi.</div>
+                <div className="alert alert-danger">
+                    Ma'lumotlarni yuklashda xatolik yuz berdi.
+                </div>
             </div>
         );
     }
@@ -39,10 +47,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
         <div className={styles.layoutWrapper}>
             <Background />
+
             <Navbar />
+
             <main className={styles.mainContent}>
                 {children}
             </main>
+
             <Footer />
         </div>
     );

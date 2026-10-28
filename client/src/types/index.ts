@@ -2,15 +2,24 @@ export interface ApiResponse<T> {
     status: boolean;
     statuscode: number;
     message: string;
-    data: T[];
+    data: T;
     timestamp: string;
 }
 
 export interface AboutData {
+    id?: number;
     firstname: string;
     lastname: string;
-    image: string;
+    image: string | null;
     about_text: string;
+
+    hero_badge: string;
+    hero_university: string;
+    hero_description: string;
+    hero_role: string;
+    hero_primary_button: string;
+    hero_secondary_button: string;
+
     phone_number: string;
     email: string;
     github_link: string;
@@ -19,27 +28,31 @@ export interface AboutData {
 }
 
 export interface Project {
-    id?: number;
-    project_name: string;
-    project_image: string;
-    project_description: string;
-    project_link: string;
-    project_github_link: string;
+    id: number;
+    title: string;
+    description: string;
+    image: string | null;
+    github_link: string;
+    demo_link: string;
+    technologies: string[];
     created_at: string;
 }
 
 export interface Question {
-    name: string;
-    email: string;
-    message: string;
-    answer?: string;
-    created_at?: string;
+    id: number;
+    question: string;
+    answer: string;
+    order: number;
 }
 
 export interface ContactFormData {
     name: string;
     email: string;
     message: string;
+}
+
+export interface ContactResponse {
+    id: number;
 }
 
 export interface StatusState {

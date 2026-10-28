@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getQuestions, sendQuestion } from '../../services/contactService';
-import type { ContactFormData, Question, StatusState } from '../../types';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {getQuestions, sendQuestion} from '../../services/contactService';
+import type {ContactFormData, Question, StatusState} from '../../types';
 
 import ContactForm from './ContactForm';
 import ContactStatus from './ContactStatus';
@@ -11,7 +11,7 @@ import styles from '../../styles/Contact/Contact.module.scss';
 
 const ContactContent: React.FC = () => {
     const navigate = useNavigate();
-    const { executeRecaptcha } = useGoogleReCaptcha();
+    const {executeRecaptcha} = useGoogleReCaptcha();
     const queryClient = useQueryClient();
 
     const [formData, setFormData] = useState<ContactFormData>({
@@ -21,7 +21,7 @@ const ContactContent: React.FC = () => {
     });
     const [status, setStatus] = useState<StatusState | null>(null);
 
-    const { data: questions } = useQuery<Question[]>({
+    const {data: questions} = useQuery<Question[]>({
         queryKey: ['questions'],
         queryFn: getQuestions,
     });
@@ -34,16 +34,16 @@ const ContactContent: React.FC = () => {
         mutationFn: (data: ContactFormData & { recaptcha_token: string }) => sendQuestion(data),
         onSuccess: async (result) => {
             if (result.status) {
-                setStatus({ type: 'success', msg: 'Xabar muvaffaqiyatli yuborildi!' });
-                setFormData({ name: '', email: '', message: '' });
-                await queryClient.invalidateQueries({ queryKey: ['questions'] });
+                setStatus({type: 'success', msg: 'Xabar muvaffaqiyatli yuborildi!'});
+                setFormData({name: '', email: '', message: ''});
+                await queryClient.invalidateQueries({queryKey: ['questions']});
             } else {
-                setStatus({ type: 'danger', msg: result.message || 'Xatolik yuz berdi' });
+                setStatus({type: 'danger', msg: result.message || 'Xatolik yuz berdi'});
             }
         },
         onError: (error: any) => {
             const errorMsg = error.response?.data?.message || 'Server bilan aloqa uzildi';
-            setStatus({ type: 'danger', msg: errorMsg });
+            setStatus({type: 'danger', msg: errorMsg});
         }
     });
 
@@ -51,15 +51,15 @@ const ContactContent: React.FC = () => {
         e.preventDefault();
 
         if (!executeRecaptcha) {
-            setStatus({ type: 'danger', msg: 'Xavfsizlik tizimi yuklanmagan!' });
+            setStatus({type: 'danger', msg: 'Xavfsizlik tizimi yuklanmagan!'});
             return;
         }
 
         try {
-            setStatus({ type: 'info', msg: 'Xavfsizlik tekshiruvi ketyapti...' });
+            setStatus({type: 'info', msg: 'Xavfsizlik tekshiruvi ketyapti...'});
             const token = await executeRecaptcha('contact_form');
             if (!token) {
-                setStatus({ type: 'danger', msg: 'Google reCAPTCHA token bermadi.' });
+                setStatus({type: 'danger', msg: 'Google reCAPTCHA token bermadi.'});
                 return;
             }
             await mutation.mutateAsync({
@@ -69,7 +69,7 @@ const ContactContent: React.FC = () => {
         } catch (err: any) {
             console.error("Xatolik tafsiloti:", err);
             const msg = err.response?.data?.message || err.message || "Kutilmagan xatolik";
-            setStatus({ type: 'danger', msg: `Xatolik: ${msg}` });
+            setStatus({type: 'danger', msg: `Xatolik: ${msg}`});
         }
     }, [executeRecaptcha, formData, mutation]);
 
@@ -109,14 +109,16 @@ const ContactContent: React.FC = () => {
                                     <span className={styles.line}></span>
                                 </div>
                                 <div className={styles.socialGrid}>
-                                    <a href="https://t.me/as1lbek_2706" target="_blank" rel="noreferrer" className={styles.socialCard}>
+                                    <a href="https://t.me/as1lbek_2706" target="_blank" rel="noreferrer"
+                                       className={styles.socialCard}>
                                         <div className={styles.iconBox}><i className="bi bi-send-fill"></i></div>
                                         <div className={styles.info}>
                                             <label>Telegram</label>
                                             <p>@as1lbek_2706</p>
                                         </div>
                                     </a>
-                                    <a href="https://github.com/asilbek2706" target="_blank" rel="noreferrer" className={styles.socialCard}>
+                                    <a href="https://github.com/asilbek2706" target="_blank" rel="noreferrer"
+                                       className={styles.socialCard}>
                                         <div className={styles.iconBox}><i className="bi bi-github"></i></div>
                                         <div className={styles.info}>
                                             <label>GitHub</label>
@@ -127,7 +129,7 @@ const ContactContent: React.FC = () => {
                             </div>
 
                             <div className={styles.statusMount}>
-                                <ContactStatus status={status} />
+                                <ContactStatus status={status}/>
                             </div>
                         </div>
                     </div>
@@ -140,7 +142,7 @@ const ContactContent: React.FC = () => {
 const Contact: React.FC = () => {
     return (
         <GoogleReCaptchaProvider
-            reCaptchaKey="6LfAH2gsAAAAAKLLBq6V09t6nnUhKpfRAEBOKH3b"
+            reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
             language="uz"
             container={{
                 parameters: {
@@ -149,7 +151,7 @@ const Contact: React.FC = () => {
                 }
             }}
         >
-            <ContactContent />
+            <ContactContent/>
         </GoogleReCaptchaProvider>
     );
 };

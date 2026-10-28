@@ -4,6 +4,12 @@ from .models import ContactMessage
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):
+    subject = serializers.CharField(
+        required=False,
+        default="Portfolio contact",
+        max_length=200,
+    )
+
     class Meta:
         model = ContactMessage
         fields = [

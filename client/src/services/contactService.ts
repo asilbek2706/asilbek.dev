@@ -1,7 +1,11 @@
-import api from '../api/axios';
-import type { ApiResponse, Question } from '../types';
+﻿import api from '../api/axios';
+import type {
+    ApiResponse,
+    ContactResponse,
+    Question,
+} from '../types';
 
-interface IContact {
+interface SendQuestionPayload {
     name: string;
     email: string;
     message: string;
@@ -9,17 +13,17 @@ interface IContact {
 }
 
 export const getQuestions = async (): Promise<Question[]> => {
-    const response = await api.get<ApiResponse<Question>>('/questions-list/');
+    const response = await api.get<ApiResponse<Question[]>>('/questions-list/');
     return response.data.data;
 };
 
-export const sendQuestion = async (data: IContact): Promise<ApiResponse<IContact>> => {
-    const response = await api.post<ApiResponse<IContact>>('/contact/',
-        {
-            name: data.name,
-            email: data.email,
-            message: data.message,
-            recaptcha_token: data.recaptcha_token
-        });
+export const sendQuestion = async (
+    data: SendQuestionPayload,
+): Promise<ApiResponse<ContactResponse>> => {
+    const response = await api.post<ApiResponse<ContactResponse>>(
+        '/contact/',
+        data,
+    );
+
     return response.data;
 };
