@@ -1,10 +1,17 @@
-﻿from django.db import models
+from django.db import models
+
+from common.validators import validate_image_file
 
 
 class About(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="about/", blank=True, null=True)
+    image = models.ImageField(
+        upload_to="about/",
+        blank=True,
+        null=True,
+        validators=[validate_image_file],
+    )
     about_text = models.TextField()
     phone_number = models.CharField(max_length=30, blank=True)
     email = models.EmailField()

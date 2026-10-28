@@ -203,3 +203,6 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Personal portfolio website API",
     "VERSION": "1.0.0",
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
