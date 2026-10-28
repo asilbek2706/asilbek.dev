@@ -1,4 +1,4 @@
-﻿"""
+"""
 Django settings for config project.
 """
 
@@ -32,7 +32,6 @@ ALLOWED_HOSTS = env.list(
 # Application definition
 
 INSTALLED_APPS = [
-    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,12 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # Third-party
     "rest_framework",
     "corsheaders",
     "drf_spectacular",
 
-    # Local apps
     "about",
     "projects",
     "contact",
@@ -94,8 +91,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 
@@ -133,9 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
 USE_TZ = True
 
@@ -143,6 +142,12 @@ USE_TZ = True
 # Static files
 
 STATIC_URL = "static/"
+
+
+# Media files
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Email
@@ -185,7 +190,6 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = "same-origin"
 X_FRAME_OPTIONS = "DENY"
 
-# Production HTTPS security
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
@@ -203,6 +207,3 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Personal portfolio website API",
     "VERSION": "1.0.0",
 }
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
