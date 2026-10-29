@@ -1,4 +1,5 @@
-﻿from rest_framework.views import APIView
+from drf_spectacular.utils import extend_schema
+from rest_framework.views import APIView
 
 from common.responses import api_response
 
@@ -7,6 +8,7 @@ from .serializers import AboutSerializer
 
 
 class AboutView(APIView):
+    @extend_schema(responses=AboutSerializer)
     def get(self, request):
         about = About.objects.first()
 

@@ -12,6 +12,7 @@ dependencies = [
     "drf-spectacular>=0.30.0",
     "pillow>=13.0.0",
     "psycopg[binary]>=3.3.6",
+    "requests>=2.34.2",
 ]
 
 [tool.uv]

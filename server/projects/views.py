@@ -1,4 +1,5 @@
-﻿from rest_framework.views import APIView
+from drf_spectacular.utils import extend_schema
+from rest_framework.views import APIView
 
 from common.responses import api_response
 
@@ -7,6 +8,7 @@ from .serializers import ProjectSerializer
 
 
 class ProjectListView(APIView):
+    @extend_schema(responses=ProjectSerializer(many=True))
     def get(self, request):
         projects = Project.objects.all()
         serializer = ProjectSerializer(

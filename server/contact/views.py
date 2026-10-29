@@ -1,8 +1,11 @@
-﻿from rest_framework import status
+from drf_spectacular.utils import extend_schema
+from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
+
+from notifications.telegram import send_telegram_message
 
 from common.responses import api_response
 from common.recaptcha import (
@@ -21,6 +24,10 @@ class ContactCreateView(APIView):
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = "contact"
 
+    @extend_schema(
+        request=ContactMessageSerializer,
+        responses=dict,
+    )
     def post(self, request):
         serializer = ContactMessageSerializer(data=request.data)
 
@@ -54,6 +61,16 @@ class ContactCreateView(APIView):
             )
 
         contact_message = serializer.save()
+
+        telegram_message = (
+            "?? Yangi portfolio xabari\n\n"
+            f"?? Ism: {contact_message.name}\n"
+            f"?? Email: {contact_message.email}\n"
+            f"?? Mavzu: {contact_message.subject}\n\n"
+            f"?? Xabar:\n{contact_message.message}"
+        )
+
+        send_telegram_message(telegram_message)
 
         return api_response(
             data={"id": contact_message.id},

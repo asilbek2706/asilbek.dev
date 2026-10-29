@@ -1,4 +1,5 @@
-﻿from rest_framework.views import APIView
+from drf_spectacular.utils import extend_schema
+from rest_framework.views import APIView
 
 from common.responses import api_response
 
@@ -7,6 +8,7 @@ from .serializers import QuestionSerializer
 
 
 class QuestionListView(APIView):
+    @extend_schema(responses=QuestionSerializer(many=True))
     def get(self, request):
         questions = Question.objects.filter(is_active=True)
 
