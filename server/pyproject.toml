@@ -11,6 +11,7 @@ dependencies = [
     "django-environ>=0.14.0",
     "djangorestframework>=3.18.3",
     "drf-spectacular>=0.30.0",
+    "gunicorn>=26.2.0",
     "pillow>=13.0.0",
     "psycopg[binary]>=3.3.6",
     "redis>=8.1.0",
