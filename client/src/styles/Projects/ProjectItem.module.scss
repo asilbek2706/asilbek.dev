@@ -289,11 +289,18 @@
 }
 
 @media (max-width: 480px) {
-  .projectCard .imageSection {
-    height: 160px;
-  }
-  .projectCard .infoSection .title {
-    font-size: 1.1rem;
+  .projectCard {
+    .imageSection {
+      height: 160px;
+    }
+
+    .infoSection {
+      padding: 10px 16px 18px;
+
+      .title {
+        font-size: 1.1rem;
+      }
+    }
   }
 }
 

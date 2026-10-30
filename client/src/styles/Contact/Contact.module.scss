@@ -198,10 +198,20 @@
 // Adaptiv dizayn
 @media (max-width: 768px) {
   .contactPageWrapper {
-    padding: 100px 0 40px;
+    padding: 92px 0 32px;
   }
 
   .socialCard:hover {
     transform: none; // Mobilda surilish noqulay bo'lishi mumkin
+  }
+}
+
+@media (max-width: 480px) {
+  .contactPageWrapper {
+    padding-top: 82px;
+  }
+
+  .socialCard {
+    padding: 14px 16px;
   }
 }

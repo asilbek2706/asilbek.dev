@@ -369,7 +369,7 @@
   }
 
   .visualWrapper {
-    transform: scale(0.9);
+    transform: none;
   }
 }
 
@@ -393,6 +393,10 @@
   }
 
   .visualWrapper {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+
     .mainImageFrame {
       width: 280px;
       height: 380px;
@@ -451,6 +455,12 @@
     .btnOutline {
       margin-left: 0;
     }
+
+    .btnPrimary,
+    .btnOutline {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }
 
@@ -478,7 +488,7 @@
   }
 
   .visualWrapper {
-    transform: scale(0.8);
+    max-width: 290px;
 
     .mainImageFrame {
       width: 240px;
