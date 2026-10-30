@@ -1,11 +1,11 @@
-from drf_spectacular.utils import extend_schema
+﻿from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 
-from notifications.telegram import send_telegram_message
+from common.tasks import send_telegram_notification
 
 from common.responses import api_response
 from common.recaptcha import (
@@ -70,10 +70,11 @@ class ContactCreateView(APIView):
             f"?? Xabar:\n{contact_message.message}"
         )
 
-        send_telegram_message(telegram_message)
+        send_telegram_notification.delay(telegram_message)
 
         return api_response(
             data={"id": contact_message.id},
             message="Message sent successfully",
             statuscode=status.HTTP_201_CREATED,
         )
+

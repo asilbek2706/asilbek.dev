@@ -1,4 +1,4 @@
-from unittest.mock import patch
+﻿from unittest.mock import patch
 
 from django.core.cache import cache
 from django.test import TestCase
@@ -24,7 +24,7 @@ class ContactAPITestCase(TestCase):
         }
 
     @patch("contact.views.verify_recaptcha", return_value=True)
-    @patch("contact.views.send_telegram_message", return_value=True)
+    @patch("contact.views.send_telegram_notification.delay", return_value=True)
     def test_contact_success(self, mock_telegram, mock_recaptcha):
         response = self.client.post(
             self.url,
@@ -93,7 +93,7 @@ class ContactAPITestCase(TestCase):
 
     @patch.object(ScopedRateThrottle, "get_rate", return_value="2/minute")
     @patch("contact.views.verify_recaptcha", return_value=True)
-    @patch("contact.views.send_telegram_message", return_value=True)
+    @patch("contact.views.send_telegram_notification.delay", return_value=True)
     def test_contact_rate_limit(
         self,
         mock_telegram,
@@ -118,3 +118,4 @@ class ContactAPITestCase(TestCase):
 
         self.assertEqual(response.status_code, 429)
         self.assertEqual(ContactMessage.objects.count(), 2)
+
