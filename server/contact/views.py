@@ -1,4 +1,5 @@
-﻿from drf_spectacular.utils import extend_schema
+﻿import logging
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
@@ -14,6 +15,8 @@ from common.recaptcha import (
 )
 
 from .serializers import ContactMessageSerializer
+
+logger = logging.getLogger(__name__)
 
 
 class ContactCreateView(APIView):
@@ -70,7 +73,10 @@ class ContactCreateView(APIView):
             f"?? Xabar:\n{contact_message.message}"
         )
 
-        send_telegram_notification.delay(telegram_message)
+        try:
+            send_telegram_notification.delay(telegram_message)
+        except Exception:
+            logger.exception("Telegram notification task could not be queued")
 
         return api_response(
             data={"id": contact_message.id},
