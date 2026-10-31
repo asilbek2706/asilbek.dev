@@ -9,7 +9,7 @@ const FooterBrand: React.FC<{ info: AboutData }> = ({ info }) => (
                 {info.firstname.toLowerCase()}
             </h3>
             <p className={styles.quote}>
-                "Kod yozish â€” bu san'at, interfeys yaratish esa â€” bu foydalanuvchi qalbini zabt etishdir."
+                "Kod yozish bu san'at, interfeys yaratish esa bu foydalanuvchi qalbini zabt etishdir."
             </p>
             <div className={styles.socialGrid}>
                 <a href={info.github_link} target="_blank" rel="noreferrer" className={styles.socialPill}>
