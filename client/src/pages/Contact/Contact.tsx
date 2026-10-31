@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+﻿import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import {getQuestions, sendQuestion} from '../../services/contactService';
 import type {ContactFormData, Question, StatusState} from '../../types';
 
@@ -12,7 +12,6 @@ import styles from '../../styles/Contact/Contact.module.scss';
 const ContactContent: React.FC = () => {
     const navigate = useNavigate();
     const {executeRecaptcha} = useGoogleReCaptcha();
-    const queryClient = useQueryClient();
 
     const [formData, setFormData] = useState<ContactFormData>({
         name: '',
@@ -36,7 +35,6 @@ const ContactContent: React.FC = () => {
             if (result.status) {
                 setStatus({type: 'success', msg: 'Xabar muvaffaqiyatli yuborildi!'});
                 setFormData({name: '', email: '', message: ''});
-                await queryClient.invalidateQueries({queryKey: ['questions']});
             } else {
                 setStatus({type: 'danger', msg: result.message || 'Xatolik yuz berdi'});
             }
