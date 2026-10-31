@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import type { AboutData } from '../../types';
 import styles from '../../styles/About/HeroSection.module.scss';
 
@@ -39,6 +39,28 @@ const HeroSection: React.FC<Props> = ({ about }) => {
                     {/* 2. TEXT QISMI */}
                     <div className="col-lg-7">
                         <div className={styles.infoWrapper}>
+                            <div className={styles.mobileIdentity}>
+                                <div className={styles.mobileImageFrame}>
+                                    <img
+                                        src={about.image || ""}
+                                        alt={about.firstname}
+                                        className={styles.mobileProfileImg}
+                                    />
+                                    <span className={styles.mobileImageAccent}></span>
+                                </div>
+                                <div className={styles.mobileIdentityInfo}>
+                                    <span className={styles.mobileEyebrow}>ABOUT / 01</span>
+                                    <h2 className={styles.mobileName}>
+                                        {about.firstname}
+                                        <span>{about.lastname}</span>
+                                    </h2>
+                                    <div className={styles.mobileExperience}>
+                                        <i className="bi bi-lightning-charge-fill"></i>
+                                        <span>2+ Years Learning</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className={styles.metaBadge}>
                                 <span className={styles.dot}></span>
                                 <span className={styles.metaText}>Men Haqimda</span>

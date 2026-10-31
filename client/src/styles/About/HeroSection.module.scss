@@ -419,3 +419,251 @@
     transform: none;
   }
 }
+/* Mobile identity redesign */
+.mobileIdentity {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .aboutHero {
+    padding: 52px 0 64px;
+
+    .imageContainer {
+      display: none;
+    }
+
+    .infoWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: left;
+
+      .mobileIdentity {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 0 0 38px;
+        text-align: left;
+      }
+
+      .mobileImageFrame {
+        position: relative;
+        flex: 0 0 112px;
+        width: 112px;
+        height: 132px;
+        padding: 5px;
+        border: 1px solid rgba(v.$accent-yellow, 0.45);
+        border-radius: 22px;
+        transform: rotate(-3deg);
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .mobileProfileImg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 17px;
+        filter: grayscale(12%) brightness(0.95);
+      }
+
+      .mobileImageAccent {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        right: -8px;
+        top: -8px;
+        border-top: 2px solid v.$accent-yellow;
+        border-right: 2px solid v.$accent-yellow;
+        border-radius: 0 8px 0 0;
+      }
+
+      .mobileIdentityInfo {
+        min-width: 0;
+      }
+
+      .mobileEyebrow {
+        display: block;
+        color: v.$accent-yellow;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        margin-bottom: 9px;
+      }
+
+      .mobileName {
+        color: #fff;
+        font-size: clamp(1.8rem, 7vw, 2.4rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -1px;
+        margin: 0 0 12px;
+
+        span {
+          display: block;
+          color: transparent;
+          -webkit-text-stroke: 0.8px rgba(255, 255, 255, 0.45);
+        }
+      }
+
+      .mobileExperience {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: v.$accent-yellow;
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 7px 10px;
+        border: 1px solid rgba(v.$accent-yellow, 0.2);
+        border-radius: 30px;
+        background: rgba(v.$accent-yellow, 0.045);
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
+
+      .metaBadge {
+        align-self: flex-start;
+        margin-bottom: 18px;
+      }
+
+      .mainTitle {
+        display: none;
+      }
+
+      .leadText {
+        max-width: 100%;
+        margin-bottom: 30px;
+        font-size: 0.98rem;
+        line-height: 1.75;
+      }
+
+      .contactGrid {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+
+      .contactCard {
+        min-width: 0;
+        padding: 15px 12px;
+        gap: 10px;
+        backdrop-filter: none;
+        border-radius: 17px;
+      }
+
+      .iconBox {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+      }
+
+      .details {
+        min-width: 0;
+
+        .label {
+          font-size: 0.65rem;
+        }
+
+        .link,
+        .value {
+          display: block;
+          font-size: 0.78rem;
+          overflow-wrap: anywhere;
+        }
+      }
+
+      .footer {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding-top: 24px;
+      }
+
+      .socialGrid {
+        gap: 10px;
+      }
+
+      .socialBtn {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutHero {
+    padding: 40px 0 52px;
+
+    .infoWrapper {
+      .mobileIdentity {
+        gap: 15px;
+        margin-bottom: 32px;
+      }
+
+      .mobileImageFrame {
+        flex-basis: 96px;
+        width: 96px;
+        height: 116px;
+      }
+
+      .mobileName {
+        font-size: 1.85rem;
+      }
+
+      .mobileEyebrow {
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+      }
+
+      .mobileExperience {
+        font-size: 0.61rem;
+        padding: 6px 8px;
+      }
+
+      .contactGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .contactCard {
+        padding: 15px;
+      }
+    }
+  }
+}
+/* Mobile identity spacing and surname interaction */
+@media (max-width: 768px) {
+  .aboutHero .infoWrapper {
+    .mobileIdentity {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .mobileIdentityInfo {
+      flex: 1;
+      text-align: left;
+    }
+
+    .mobileName span {
+      transition: color 0.4s ease, -webkit-text-stroke 0.4s ease,
+        text-shadow 0.4s ease;
+    }
+
+    .mobileIdentityInfo:hover .mobileName span,
+    .mobileIdentityInfo:focus-within .mobileName span,
+    .mobileIdentityInfo:active .mobileName span {
+      color: v.$accent-yellow;
+      -webkit-text-stroke: 1px v.$accent-yellow;
+      text-shadow: 0 0 16px rgba(v.$accent-yellow, 0.35);
+    }
+  }
+}
