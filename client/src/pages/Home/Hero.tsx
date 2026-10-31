@@ -25,6 +25,31 @@ const Hero: React.FC<HeroProps> = ({ aboutInfo }) => (
                             </span>
                         </div>
 
+                        <div className={styles.mobileIdentity}>
+                            <div className={styles.mobileProfile}>
+                                <span className={styles.mobileProfileRing}></span>
+
+                                <img
+                                    src={aboutInfo.image || ""}
+                                    alt={aboutInfo.firstname}
+                                    className={styles.mobileProfileImg}
+                                />
+
+                                <span className={styles.mobileProfileDot}></span>
+                            </div>
+
+                            <div className={styles.mobileName}>
+                                <span className={styles.mobileGreeting}>
+                                    Salom, men
+                                </span>
+
+                                <div className={styles.mobileTitle}>
+                                    {aboutInfo.firstname}{' '}
+                                    <span>{aboutInfo.lastname}</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <h1
                             className={styles.title}
                             style={{ '--delay': '0.3s' } as React.CSSProperties}
@@ -121,3 +146,4 @@ const Hero: React.FC<HeroProps> = ({ aboutInfo }) => (
 );
 
 export default Hero;
+

@@ -513,3 +513,146 @@
     display: none;
   }
 }
+/* Compact mobile identity */
+.mobileIdentity {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .heroModern {
+    padding: 48px 0 64px;
+  }
+
+  .contentBox {
+    margin-bottom: 0;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .visualWrapper {
+    display: none;
+  }
+
+  .mobileIdentity {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 8px 0 30px;
+    text-align: left;
+  }
+
+  .mobileProfile {
+    position: relative;
+    flex: 0 0 auto;
+    width: 106px;
+    height: 106px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileProfileRing {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(v.$accent-yellow, 0.5);
+    border-radius: 50%;
+    transform: rotate(-12deg);
+  }
+
+  .mobileProfileImg {
+    position: relative;
+    z-index: 2;
+    width: 92px;
+    height: 92px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 2px solid rgba(v.$accent-yellow, 0.7);
+    filter: grayscale(8%) contrast(1.05);
+    box-shadow:
+      0 0 0 5px rgba(v.$accent-yellow, 0.04),
+      0 12px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .mobileProfileDot {
+    position: absolute;
+    z-index: 3;
+    width: 7px;
+    height: 7px;
+    right: 2px;
+    top: 16px;
+    border-radius: 50%;
+    background: v.$accent-yellow;
+    box-shadow: 0 0 12px rgba(v.$accent-yellow, 0.7);
+  }
+
+  .mobileName {
+    min-width: 0;
+  }
+
+  .mobileGreeting {
+    display: block;
+    margin-bottom: 5px;
+    color: v.$accent-yellow;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .mobileTitle {
+    color: #fff;
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -1.5px;
+
+    span {
+      color: transparent;
+      -webkit-text-stroke: 0.7px rgba(255, 255, 255, 0.35);
+    }
+  }
+
+  .description {
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroModern {
+    padding: 38px 0 52px;
+  }
+
+  .mobileIdentity {
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .mobileProfile {
+    width: 88px;
+    height: 88px;
+  }
+
+  .mobileProfileImg {
+    width: 76px;
+    height: 76px;
+  }
+
+  .mobileProfileDot {
+    width: 6px;
+    height: 6px;
+    right: 0;
+    top: 12px;
+  }
+
+  .mobileTitle {
+    font-size: 2rem;
+  }
+
+  .mobileGreeting {
+    font-size: 0.6rem;
+    letter-spacing: 2.5px;
+  }
+}
