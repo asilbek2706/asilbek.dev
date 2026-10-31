@@ -1,4 +1,4 @@
-import logging
+﻿import logging
 
 import requests
 from django.conf import settings
@@ -23,7 +23,7 @@ def send_telegram_message(message: str) -> bool:
                 "chat_id": chat_id,
                 "text": message,
             },
-            timeout=10,
+            timeout=3,
         )
         response.raise_for_status()
 
@@ -41,3 +41,4 @@ def send_telegram_message(message: str) -> bool:
     except (requests.RequestException, ValueError):
         logger.exception("Failed to send Telegram notification.")
         return False
+

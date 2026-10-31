@@ -2,11 +2,11 @@
 
 .formContainer {
   width: 100%;
-  background: rgba(255, 255, 255, 0.02); // Juda yupqa shaffof fon
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 40px;
   border-radius: 24px;
-  backdrop-filter: blur(10px); // Orqa fonni biroz xiralashtirish (ixtiyoriy)
+  backdrop-filter: blur(10px);
 }
 
 .headerSection {
@@ -89,6 +89,24 @@
     }
   }
 
+  .inputError {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 12px rgba(255, 77, 77, 0.08);
+
+    &:focus {
+      border-color: #ff4d4d;
+      box-shadow: 0 0 16px rgba(255, 77, 77, 0.12);
+    }
+  }
+
+  .validationError {
+    color: #ff4d4d;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin: -3px 0 0 5px;
+    letter-spacing: 0.2px;
+  }
+
   textarea.input {
     resize: none;
   }
@@ -133,6 +151,8 @@
     opacity: 0.6;
     cursor: not-allowed;
     filter: grayscale(0.5);
+    transform: none;
+    box-shadow: none;
   }
 }
 
@@ -159,6 +179,7 @@
   .formContainer {
     padding: 24px 18px;
   }
+
   .title {
     font-size: 1.6rem;
   }
