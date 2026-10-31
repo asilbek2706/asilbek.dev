@@ -11,7 +11,6 @@ const QuestionsPage: React.FC = () => {
     const { data: questions, isLoading } = useQuery<Question[]>({
         queryKey: ['questions'],
         queryFn: getQuestions,
-        refetchInterval: 15000,
     });
 
     useEffect(() => {
@@ -120,3 +119,4 @@ const QuestionsPage: React.FC = () => {
 };
 
 export default QuestionsPage;
+
