@@ -13,19 +13,19 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 32px;
   overflow: hidden;
-  backdrop-filter: blur(20px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column; // Kontentni vertikal tekislash
 
   &:hover {
-    transform: translateY(-15px) rotateX(4deg) rotateY(-2deg);
+    transform: translateY(-5px);
     border-color: rgba(v.$accent-yellow, 0.3);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
     0 0 40px rgba(v.$accent-yellow, 0.05);
 
     .mainImg {
-      transform: scale(1.1);
+      transform: scale(1.03);
       filter: grayscale(0%) brightness(1.1);
     }
 
@@ -60,7 +60,7 @@
     height: 100%;
     object-fit: cover;
     filter: grayscale(40%) brightness(0.8);
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.3s ease, filter 0.3s ease;
   }
 
   .imageOverlays {
@@ -105,7 +105,7 @@
     width: 45px;
     height: 45px;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
