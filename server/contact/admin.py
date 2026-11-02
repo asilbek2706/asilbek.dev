@@ -12,6 +12,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "email",
         "subject",
         "answer_status",
+        "publish_as_faq",
         "created_at",
     )
 
@@ -45,6 +46,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "answer",
+                    "publish_as_faq",
                 )
             },
         ),
@@ -63,7 +65,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
         answer = obj.answer.strip()
 
-        if answer:
+        if answer and obj.publish_as_faq:
             Question.objects.update_or_create(
                 contact_message=obj,
                 defaults={
