@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {getQuestions, sendQuestion} from '../../services/contactService';
@@ -8,10 +7,10 @@ import type {ContactFormData, Question, StatusState} from '../../types';
 import ContactForm from './ContactForm';
 import FAQSection from './FAQSection';
 import ContactStatus from './ContactStatus';
+import QuickLinks from './QuickLinks';
 import styles from '../../styles/Contact/Contact.module.scss';
 
 const ContactContent: React.FC = () => {
-    const navigate = useNavigate();
     const {executeRecaptcha} = useGoogleReCaptcha();
 
     const [formData, setFormData] = useState<ContactFormData>({
@@ -57,10 +56,12 @@ const ContactContent: React.FC = () => {
         try {
             setStatus({type: 'info', msg: 'Xavfsizlik tekshiruvi ketyapti...'});
             const token = await executeRecaptcha('contact_form');
+
             if (!token) {
                 setStatus({type: 'danger', msg: 'Google reCAPTCHA token bermadi.'});
                 return;
             }
+
             await mutation.mutateAsync({
                 ...formData,
                 recaptcha_token: token
@@ -85,48 +86,6 @@ const ContactContent: React.FC = () => {
                                 isPending={mutation.isPending}
                             />
 
-                            <div className={styles.navigationBox}>
-                                <button
-                                    type="button"
-                                    className={styles.jumpToBtn}
-                                    onClick={() => navigate('/contact/questions')}
-                                >
-                                    <div className={styles.btnInfo}>
-                                        <i className="bi bi-chat-square-dots-fill"></i>
-                                        <span>Muloqotlar arxivi</span>
-                                    </div>
-                                    <div className={styles.countBadge}>
-                                        {questions?.length || 0}
-                                    </div>
-                                </button>
-                            </div>
-
-                            <div className={styles.socialsWrapper}>
-                                <div className={styles.socialHeader}>
-                                    <span className={styles.line}></span>
-                                    <span className={styles.text}>Direct Contact</span>
-                                    <span className={styles.line}></span>
-                                </div>
-                                <div className={styles.socialGrid}>
-                                    <a href="https://t.me/as1lbek_2706" target="_blank" rel="noreferrer"
-                                       className={styles.socialCard}>
-                                        <div className={styles.iconBox}><i className="bi bi-send-fill"></i></div>
-                                        <div className={styles.info}>
-                                            <label>Telegram</label>
-                                            <p>@as1lbek_2706</p>
-                                        </div>
-                                    </a>
-                                    <a href="https://github.com/asilbek2706" target="_blank" rel="noreferrer"
-                                       className={styles.socialCard}>
-                                        <div className={styles.iconBox}><i className="bi bi-github"></i></div>
-                                        <div className={styles.info}>
-                                            <label>GitHub</label>
-                                            <p>asilbek2706</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
                             <div className={styles.statusMount}>
                                 <ContactStatus status={status}/>
                             </div>
@@ -135,6 +94,12 @@ const ContactContent: React.FC = () => {
 
                     <div className="col-lg-6">
                         <FAQSection />
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-12">
+                        <QuickLinks questionCount={questions?.length || 0} />
                     </div>
                 </div>
             </div>

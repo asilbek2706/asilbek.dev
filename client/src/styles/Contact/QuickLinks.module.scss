@@ -1,0 +1,345 @@
+﻿@use "../abstracts/variables" as v;
+
+.quickLinks {
+  --accent: #{v.$accent-yellow};
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(190px, 0.8fr) minmax(0, 2fr) minmax(100px, 0.55fr);
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  min-height: 220px;
+  margin-top: 34px;
+  padding: 32px 38px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(ellipse at 8% 50%, rgba(255, 204, 0, 0.09), transparent 38%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 25px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    border-color: rgba(255, 204, 0, 0.48);
+    box-shadow:
+      0 0 35px rgba(255, 204, 0, 0.08),
+      inset 0 0 35px rgba(255, 204, 0, 0.025);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 240px;
+    height: 240px;
+    right: -100px;
+    bottom: -155px;
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    border-radius: 50%;
+    box-shadow: 0 0 35px rgba(255, 204, 0, 0.08);
+  }
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 14px;
+    color: #080808;
+    background: v.$accent-yellow;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #111;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  }
+
+  h2 {
+    margin: 20px 0 10px;
+    color: #fff;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 850;
+    line-height: 1.12;
+    letter-spacing: -0.8px;
+  }
+
+  p {
+    max-width: 220px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
+.links {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.linkCard {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  padding: 8px 14px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:last-child {
+    border-right: 0;
+  }
+
+  &:hover {
+    background: rgba(255, 204, 0, 0.045);
+
+    .iconCircle {
+      color: #080808;
+      background: v.$accent-yellow;
+      border-color: v.$accent-yellow;
+      box-shadow: 0 0 24px rgba(255, 204, 0, 0.28);
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    .arrow {
+      color: #080808;
+      background: v.$accent-yellow;
+      border-color: v.$accent-yellow;
+      transform: translate(3px, -3px);
+    }
+
+    .linkInfo strong {
+      color: v.$accent-yellow;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$accent-yellow;
+    outline-offset: -3px;
+    border-radius: 12px;
+  }
+}
+
+.iconCircle {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  color: v.$accent-yellow;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  font-size: 1.45rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.linkInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  strong {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.88rem;
+    font-weight: 750;
+    transition: color 0.3s ease;
+  }
+
+  small {
+    color: rgba(255, 255, 255, 0.43);
+    font-size: 0.73rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  color: v.$accent-yellow;
+  border: 1px solid rgba(255, 204, 0, 0.55);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.decoration {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  color: v.$accent-yellow;
+
+  i {
+    font-size: clamp(4rem, 7vw, 6.5rem);
+    transform: rotate(-15deg);
+    filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.3));
+    animation: planeFloat 5s ease-in-out infinite;
+  }
+
+  span {
+    position: absolute;
+    width: 90px;
+    height: 25px;
+    bottom: 4px;
+    border: 1px solid rgba(255, 204, 0, 0.65);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+    filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.4));
+  }
+}
+
+@keyframes planeFloat {
+  0%, 100% { transform: translateY(0) rotate(-15deg); }
+  50% { transform: translateY(-9px) rotate(-10deg); }
+}
+
+@media (max-width: 991px) {
+  .quickLinks {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .intro {
+    text-align: center;
+
+    h2 {
+      margin-top: 14px;
+    }
+
+    p {
+      max-width: none;
+    }
+  }
+
+  .links {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+  }
+
+  .decoration {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .quickLinks {
+    gap: 18px;
+    min-height: auto;
+    margin-top: 22px;
+    padding: 23px 16px;
+    border-radius: 20px;
+  }
+
+  .intro {
+    .eyebrow {
+      font-size: 0.58rem;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+    }
+
+    p {
+      font-size: 0.82rem;
+    }
+  }
+
+  .links {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding-top: 15px;
+  }
+
+  .linkCard {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
+    min-height: 72px;
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 14px;
+
+    &:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.075);
+    }
+
+    &:hover {
+      transform: translateX(3px);
+    }
+  }
+
+  .iconCircle {
+    flex: 0 0 43px;
+    width: 43px;
+    height: 43px;
+    font-size: 1.1rem;
+  }
+
+  .linkInfo {
+    flex: 1;
+    gap: 3px;
+
+    strong {
+      font-size: 0.82rem;
+    }
+
+    small {
+      font-size: 0.7rem;
+    }
+  }
+
+  .arrow {
+    flex: 0 0 29px;
+    width: 29px;
+    height: 29px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quickLinks,
+  .linkCard,
+  .iconCircle,
+  .arrow {
+    transition: none;
+  }
+
+  .decoration i {
+    animation: none;
+  }
+}
