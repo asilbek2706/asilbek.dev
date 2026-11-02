@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir uv \
 COPY . .
 
 # Collect static files for production
-RUN --mount=type=secret,id=django_env     set -a && . /run/secrets/django_env && set +a &&     uv run --no-sync python manage.py collectstatic --noinput
+RUN SECRET_KEY=static-build-only-key     DEBUG=False     DB_NAME=static_build     DB_USER=static_build     DB_PASSWORD=static_build     DB_HOST=127.0.0.1     DB_PORT=5432     uv run --no-sync python manage.py collectstatic --noinput
 
 # Render $PORT beradi; Docker ichida Django shu portda tinglaydi.
 EXPOSE 8000
