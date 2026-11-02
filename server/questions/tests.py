@@ -8,7 +8,7 @@ from questions.models import Question
 class QuestionsAPITestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.url = "/api/v1/faq/"
+        self.url = "/api/v1/questions-list/"
 
     def test_only_active_questions_are_public(self):
         Question.objects.create(

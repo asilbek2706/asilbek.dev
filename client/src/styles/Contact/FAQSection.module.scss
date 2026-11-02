@@ -1,0 +1,334 @@
+﻿@use "../abstracts/variables" as v;
+
+.faqSection {
+  width: 100%;
+  padding: 34px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.018);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: faqEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 17px;
+  color: v.$accent-yellow;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: v.$accent-yellow;
+  box-shadow: 0 0 12px v.$accent-yellow;
+  animation: statusPulse 2s infinite;
+}
+
+.title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-weight: 950;
+  letter-spacing: -0.8px;
+  line-height: 1.25;
+
+  span {
+    color: v.$accent-yellow;
+  }
+}
+
+.description {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faqItem {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.018);
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+  animation: itemEntrance 0.55s both;
+  animation-delay: calc(var(--item-index, 0) * 70ms);
+
+  &:hover,
+  &.open {
+    border-color: rgba(v.$accent-yellow, 0.65);
+    background: rgba(v.$accent-yellow, 0.035);
+    box-shadow:
+      0 0 0 1px rgba(v.$accent-yellow, 0.06),
+      0 0 22px rgba(v.$accent-yellow, 0.075);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.questionHeading {
+  margin: 0;
+  font-size: inherit;
+}
+
+.questionButton {
+  width: 100%;
+  min-height: 70px;
+  padding: 16px 17px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid v.$accent-yellow;
+    outline-offset: -3px;
+    border-radius: 13px;
+  }
+}
+
+.questionNumber {
+  flex: 0 0 27px;
+  color: rgba(v.$accent-yellow, 0.7);
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.questionText {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.84rem;
+  font-weight: 750;
+  line-height: 1.55;
+  transition: color 0.3s ease;
+}
+
+.open .questionText,
+.faqItem:hover .questionText {
+  color: #fff;
+}
+
+.toggleIcon {
+  position: relative;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(v.$accent-yellow, 0.3);
+  border-radius: 50%;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+
+  span {
+    position: absolute;
+    width: 10px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: v.$accent-yellow;
+    transition: transform 0.35s ease;
+  }
+
+  span:last-child {
+    transform: rotate(90deg);
+  }
+}
+
+.open .toggleIcon {
+  background: v.$accent-yellow;
+  border-color: v.$accent-yellow;
+  box-shadow: 0 0 14px rgba(v.$accent-yellow, 0.35);
+  transform: rotate(180deg);
+
+  span {
+    background: #080808;
+  }
+
+  span:last-child {
+    transform: rotate(0deg);
+  }
+}
+
+.answerPanel {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.38s ease;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.answerInner {
+  min-height: 0;
+  padding: 0 19px 20px 57px;
+  animation: answerEntrance 0.35s ease both;
+
+  p {
+    margin: 0;
+    padding-left: 15px;
+    border-left: 2px solid rgba(v.$accent-yellow, 0.55);
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.82rem;
+    line-height: 1.85;
+    white-space: pre-line;
+  }
+}
+
+.stateMessage {
+  min-height: 150px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  text-align: center;
+
+  > i {
+    color: v.$accent-yellow;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  button {
+    padding: 9px 14px;
+    border: 1px solid rgba(v.$accent-yellow, 0.4);
+    border-radius: 8px;
+    background: rgba(v.$accent-yellow, 0.06);
+    color: v.$accent-yellow;
+    font-size: 0.65rem;
+    font-weight: 900;
+    cursor: pointer;
+  }
+}
+
+.loader {
+  width: 25px;
+  height: 25px;
+  border: 2px solid rgba(v.$accent-yellow, 0.2);
+  border-top-color: v.$accent-yellow;
+  border-radius: 50%;
+  animation: loaderSpin 0.8s linear infinite;
+}
+
+.footer {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+}
+
+.footerLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@keyframes faqEntrance {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes itemEntrance {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes answerEntrance {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes statusPulse {
+  50% { opacity: 0.4; }
+}
+
+@keyframes loaderSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 576px) {
+  .faqSection {
+    padding: 27px 18px;
+    border-radius: 20px;
+  }
+
+  .questionButton {
+    min-height: 65px;
+    padding: 14px 12px;
+    gap: 9px;
+  }
+
+  .questionText {
+    font-size: 0.78rem;
+  }
+
+  .answerInner {
+    padding: 0 14px 17px 47px;
+
+    p {
+      font-size: 0.78rem;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faqSection,
+  .faqItem,
+  .answerInner,
+  .statusDot,
+  .loader {
+    animation: none !important;
+  }
+
+  .faqItem,
+  .toggleIcon,
+  .toggleIcon span {
+    transition: none !important;
+  }
+}

@@ -1,4 +1,4 @@
-﻿"""
+"""
 Django settings for config project.
 """
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "users",
     "common",
     "notifications",
+    "faq",
     "questions",
 ]
 

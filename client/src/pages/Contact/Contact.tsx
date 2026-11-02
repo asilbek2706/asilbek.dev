@@ -1,4 +1,4 @@
-﻿import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import {useMutation, useQuery} from '@tanstack/react-query';
@@ -6,6 +6,7 @@ import {getQuestions, sendQuestion} from '../../services/contactService';
 import type {ContactFormData, Question, StatusState} from '../../types';
 
 import ContactForm from './ContactForm';
+import FAQSection from './FAQSection';
 import ContactStatus from './ContactStatus';
 import styles from '../../styles/Contact/Contact.module.scss';
 
@@ -130,6 +131,10 @@ const ContactContent: React.FC = () => {
                                 <ContactStatus status={status}/>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="col-lg-6">
+                        <FAQSection />
                     </div>
                 </div>
             </div>

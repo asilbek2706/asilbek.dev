@@ -1,4 +1,4 @@
-﻿# Python
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -26,3 +26,6 @@ htmlcov/
 # IDE and local environment
 .idea/
 .python-version
+
+# Local database repair backups
+*-before-migration-repair-*

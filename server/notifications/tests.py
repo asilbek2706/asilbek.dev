@@ -30,7 +30,7 @@ class TelegramNotificationTestCase(TestCase):
                 "chat_id": "123456",
                 "text": "Test Telegram message",
             },
-            timeout=10,
+            timeout=3,
         )
 
     @override_settings(

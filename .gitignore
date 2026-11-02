@@ -35,3 +35,5 @@ client/node_modules/
 .pytest_cache/
 .coverage
 htmlcov/
+# Local edit backups
+*.before-faq.bak
